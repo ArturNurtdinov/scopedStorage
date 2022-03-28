@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_downloads"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:text="Create file in Downloads" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_images"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:text="Create file in Images" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_documents"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:text="Create file in Documents" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_glide"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:text="Download image to gallery" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
