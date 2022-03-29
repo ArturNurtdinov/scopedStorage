@@ -31,13 +31,19 @@ class MainActivity : AppCompatActivity() {
         var savedUri: Uri? = null
         binding.btnDownloads.setOnClickListener {
             val uri =
-                scopedStorage.getNewDownloadFileUri("TestVideo", ScopedStorage.MimeType.VIDEO_MP4)
+                scopedStorage.getNewDownloadFileUri("TestVideo2", ScopedStorage.MimeType.VIDEO_MP4)
             savedUri = uri
             Log.d("ScopedStorage", "Created uri for video in directory Downloads = $uri")
         }
         binding.btnDocuments.setOnClickListener {
             val uri = scopedStorage.getNewDocumentUri("TestDocument")
             Log.d("ScopedStorage", "Created uri for document in directory Documents = $uri")
+        }
+        binding.btnDelete.setOnClickListener {
+            savedUri?.let {
+                val res = scopedStorage.deleteResource(it)
+                Log.d("ScopedStorage", "Deleted file: $res")
+            }
         }
         binding.btnImages.setOnClickListener {
             val uri = scopedStorage.getNewImageGalleryUri(false)

@@ -78,6 +78,10 @@ internal class ScopedStorageImpl(
         return contentResolver.insert(collection, contentValues)
     }
 
+    override fun deleteResource(uri: Uri): Boolean {
+        return contentResolver.delete(uri, null, null) > 0
+    }
+
     @WorkerThread
     override fun saveMediaToGallery(bitmap: Bitmap, fileName: String): Uri? {
         val contentValues = generateContentValues(

@@ -54,6 +54,12 @@ public interface ScopedStorage {
     public fun getNewDocumentUri(fileName: String): Uri?
 
     /**
+     * Удаление файла по Uri
+     */
+    @WorkerThread
+    public fun deleteResource(uri: Uri): Boolean
+
+    /**
      * Сформировать имя для нового видео
      */
     public fun getVideoFileName(): String {

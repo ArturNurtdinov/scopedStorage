@@ -15,6 +15,12 @@
         android:text="Create file in Downloads" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_delete"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:text="Delete created file" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_images"
         android:layout_width="240dp"
         android:layout_height="40dp"
