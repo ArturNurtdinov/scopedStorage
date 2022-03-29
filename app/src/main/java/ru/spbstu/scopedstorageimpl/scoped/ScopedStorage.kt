@@ -7,6 +7,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.annotation.WorkerThread
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -21,6 +22,12 @@ public interface ScopedStorage {
      */
     @WorkerThread
     public fun getNewVideoGalleryUri(): Uri?
+
+    /**
+     * Записать InputStream в Uri
+     */
+    @WorkerThread
+    public fun copyInputStreamToUri(inputStream: InputStream, uri: Uri): Uri
 
     /**
      * Получить Uri для сохранения картинки в галерею

@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.annotation.WorkerThread
 import androidx.core.content.contentValuesOf
 import java.io.File
+import java.io.InputStream
 
 @RequiresApi(value = 29)
 internal class ScopedStorageImpl(
@@ -29,6 +30,17 @@ internal class ScopedStorageImpl(
         )
 
         return contentResolver.insert(collection, contentValues)
+    }
+
+    override fun copyInputStreamToUri(inputStream: InputStream, uri: Uri): Uri {
+        contentResolver.openOutputStream(uri, "w")?.use {
+            val buffer = ByteArray(1024)
+            while (inputStream.read(buffer) > 0) {
+                it.write(buffer)
+            }
+            it.flush()
+        }
+        return uri
     }
 
     @WorkerThread
@@ -85,7 +97,10 @@ internal class ScopedStorageImpl(
         }
         contentValues.put(MediaStore.Images.Media.IS_PENDING, 1)
 
-        val uri = contentResolver.insert(MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY), contentValues) ?: return null
+        val uri = contentResolver.insert(
+            MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY),
+            contentValues
+        ) ?: return null
 
         contentResolver.openOutputStream(uri, "w").use {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
@@ -101,9 +116,13 @@ internal class ScopedStorageImpl(
     }
 
     /**
-     * Генерит мета информацию
+     * Генерирует мета информацию
      */
-    private fun generateContentValues(dir: String, fileName: String, mimeType: ScopedStorage.MimeType): ContentValues {
+    private fun generateContentValues(
+        dir: String,
+        fileName: String,
+        mimeType: ScopedStorage.MimeType
+    ): ContentValues {
         val date = System.currentTimeMillis() / 1000
         val dirDest = File(dir, userMediaDirectoryName)
 
